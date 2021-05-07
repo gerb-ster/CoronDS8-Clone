@@ -1,3 +1,3 @@
-# Project Name
+# CoronDS8 Clone
 
-some description about this project goes here.
+This is a clone of the famous Coron DS8 DrumSytnh unit from the seventies.
