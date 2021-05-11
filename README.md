@@ -2,7 +2,7 @@
 
 This is a clone of the famous Coron DS8 DrumSytnh unit from the seventies.
 
-## Status
+## Status: Work in Progress
 
 - done: first schematic & board design
 - done: breadboard and test
