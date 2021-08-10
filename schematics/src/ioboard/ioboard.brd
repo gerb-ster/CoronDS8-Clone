@@ -133,7 +133,7 @@
 <wire x1="59.055" y1="99.06" x2="0" y2="99.05" width="0" layer="20"/>
 <wire x1="0" y1="99.05" x2="0" y2="0" width="0" layer="20"/>
 <text x="2.54" y="62.865" size="1.778" layer="25" font="vector">Coron Drum Synth 8
-2021
+2021 v1.1
 GERBSTER.NL</text>
 <hole x="5.08" y="19.05" drill="3.2004"/>
 <hole x="55.88" y="49.53" drill="3.2004"/>
