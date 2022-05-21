@@ -14,6 +14,7 @@ for FOLDER in ../src/*; do
         if [[ -f "$FOLDER/eagle.epf" ]]; then
             FOLDER_NAME=`basename "$FOLDER"`
             BRD_FILE=$FOLDER/$FOLDER_NAME.brd
+            SCH_FILE=$FOLDER/$FOLDER_NAME.sch
 
             echo -e "${BLUE}Found a Eagle Project in $FOLDER for $PROJECT_NAME${NOCOLOR}"
 
@@ -21,19 +22,21 @@ for FOLDER in ../src/*; do
             if [[ -f "$BRD_FILE" ]]; then
                 # remove old files
                 rm -Rf ../../gerber_files/$PROJECT_NAME-$FOLDER_NAME
+                rm -Rf ../../schematics/*.pdf
 
                 echo -e "${RED}Removed old Gerber Files for $PROJECT_NAME${NOCOLOR}"
 
                 # run cam job & export to tmp folder and name them properly
                 mkdir ./tmp
-                eagle -X -dCAMJOB -j./jlcpcb_2_layer_v9.cam -o./tmp $BRD_FILE > /dev/null 2>&1
+                eagle -X -d CAMJOB -j ./jlcpcb_2_layer_v9.cam -o ./tmp $BRD_FILE > /dev/null 2>&1
+                eagle -C "PRINT landscape 1.0 -0 -caption FILE '../$PROJECT_NAME-$FOLDER_NAME.pdf' sheets all paper a3; QUIT;" $SCH_FILE > /dev/null 2>&1;
                 mv ./tmp/tmp/* ./tmp/
                 rm -Rf ./tmp/tmp
                 cd ./tmp
                 for f in * ; do mv -- "$f" "$PROJECT_NAME-$f" ; done
                 cd ../
             
-                echo -e "${BLUE}Created Gerber Files for $PROJECT_NAME${NOCOLOR}"
+                echo -e "${BLUE}Created Gerber Files & PDF for $PROJECT_NAME${NOCOLOR}"
 
                 # move BOM file to proper directory
                 mv ./tmp/$PROJECT_NAME-BOM.html ../BOM/$PROJECT_NAME-$FOLDER_NAME.html
